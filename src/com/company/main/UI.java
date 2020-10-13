@@ -1,4 +1,4 @@
-package com.company;
+package com.company.main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +14,12 @@ public class UI extends JFrame{
     private double myThickness = 0.5;
     private double myHRadius   = 1.0;
 
+    // User input panel
+    JPanel inputPanel = new JPanel();
+
+    // Cylinder graphic panel
+    DrawPanel cylPanel = new DrawPanel();
+
     public UI(){
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setUpDisplay();
@@ -25,9 +31,9 @@ public class UI extends JFrame{
         setLayout(new GridLayout(3, 2));
 
         // Creating panel to hold all the user inputs
-        JPanel inputPanel = new JPanel();
         inputPanel.setLayout( new GridLayout(4, 2, 5, 10));
         inputPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        inputPanel.setBackground(Color.CYAN);
 
         // Construct all the user inputs
         JLabel heightLabel  = new JLabel(" Enter height (m):");
@@ -40,6 +46,7 @@ public class UI extends JFrame{
 
         // Create volume output subpanel
         JPanel volOutput = new JPanel();
+        volOutput.setBackground(Color.CYAN);
         volOutput.setLayout( new GridLayout(2, 1, 2, 5) );
         JLabel volOutputHeader = new JLabel("<html><div style='text-align: centre;'>Needed liquid (m<sup>3</sup>):" +
                 "</div></html>");
@@ -92,11 +99,6 @@ public class UI extends JFrame{
         inputPanel.add(calcBut);
         inputPanel.add(volOutput);
 
-        // Cylinder graphic panel
-        JPanel cylPanel = new JPanel();
-        JLabel placeHolder = new JLabel("I am a placeholder of the second panel");
-        cylPanel.add(placeHolder);
-
         // Make and add visual buffer panels around the two panels
         setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         add(new JPanel());
@@ -108,7 +110,7 @@ public class UI extends JFrame{
     }
 
     private double fnCalculateVolume(){
-        double volume = 0.0;
+
         double outerVol = -1.0;
         double innerVol = -1.0;
         double pi = 3.14159265;
@@ -120,5 +122,7 @@ public class UI extends JFrame{
     }
 
     private void fnUpdateGraphic(){
+        cylPanel.updateImage(myHeight, myThickness, myHRadius);
+        cylPanel.repaint();
     }
 }

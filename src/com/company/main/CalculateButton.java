@@ -1,7 +1,6 @@
-package com.company;
+package com.company.main;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 public class CalculateButton extends JButton {
 
